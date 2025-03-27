@@ -1,6 +1,4 @@
-import os
-os.environ['EXA_API_KEY']="50c2450a-4f19-4d30-a68c-080f80eeff5b"
-os.environ['OPENAI_API_KEY']="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"
+
 
 #EXA SEARCH TOOL
 from crewai_tools import EXASearchTool
