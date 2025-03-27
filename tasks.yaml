@@ -1,0 +1,48 @@
+code_analysis_task:
+  description: "Analyze the provided code {code} to identify individual units (functions, methods, classes) suitable for unit testing. Ensure that the analysis aligns with Jest's best practices.  
+  - Identify all functions, methods, and classes, including their signatures and responsibilities.  
+  - Detect dependencies, potential side effects, and areas requiring mocking or stubbing.  
+  - Ensure proper modularization and separation of concerns for effective unit testing.  
+  - Highlight any violations of Jest-specific best practices or common pitfalls."
+  expected_output: "A comprehensive report detailing each identified unit, including its name, purpose, input parameters, and dependencies. The report should also include recommendations for structuring tests effectively in Jest."
+  agent: code_analyzer_agent
+  output_file: analysis.md
+
+
+test_case_generation_task:
+  description: "Develop detailed unit test cases for each code unit identified in 'analysis.md' based on the provided code {code}.  
+  - Utilize Exa Search to fetch the latest Jest best practices, testing strategies, and edge case handling techniques from official documentation, GitHub issues, and relevant technical blogs.  
+  - Ensure that the test cases align with the most recent recommendations and Jest conventions.  
+  - Design unit tests using the Arrange-Act-Assert (AAA) pattern for clarity and maintainability.  
+  - Cover typical use cases, boundary conditions, edge cases, and error handling scenarios.  
+  - Utilize Jest features such as spies, mocks, and snapshots where necessary.  
+  - Ensure test independence and isolation, avoiding shared state between tests.  
+  - Document each test case with a clear description, input data, expected output, and setup/teardown procedures."
+  expected_output: "A markdown file ('test_cases.md') containing well-documented test cases for each code unit. Each test case should include a description, input data, expected output, and any setup or teardown procedures."
+  agent: test_case_generator_agent
+  output_file: test_cases.md
+
+
+test_executor_task:
+  description: "Execute the unit test cases outlined in 'test_cases.md' using Jest on the provided code {code}. Ensure that test execution follows best practices for accuracy and efficiency.  
+  - Run Jest tests in an isolated environment to prevent test contamination.  
+  - Record test results, capturing passed and failed test cases along with execution time.  
+  - Log any unexpected behaviors, assertion failures, or runtime errors encountered.  
+  - Use Jest's built-in coverage reporting to analyze code coverage and identify untested portions of the codebase.  
+  - Ensure the output includes meaningful error messages and debugging information for failed cases."
+  expected_output: "A detailed test execution report summarizing the results of each test case, including pass/fail status, error messages, logs, and code coverage metrics. This report should provide insights into the overall quality and reliability of the codebase."
+  agent: test_executor_agent
+  output_file: test_result.md
+  
+
+bug_analysis_task:
+  description: "Examine the test execution report to identify and analyze any failed test cases related to the provided code {code}.  
+  - Utilize Exa Search to find recent Jest debugging techniques, common failure patterns, and recommended solutions from Stack Overflow, Jest's GitHub repository, and technical forums.  
+  - Investigate the reasons behind failed test cases using error messages, logs, and stack traces.  
+  - Identify common issues such as incorrect logic, missing error handling, or unintended side effects.  
+  - Provide recommendations for refactoring, fixing logical errors, or improving test assertions.  
+  - Suggest potential Jest configurations (e.g., improved mocks, better test isolation) to enhance test reliability.  
+  - Ensure proposed fixes align with best coding practices and do not introduce new regressions."
+  expected_output: "A bug analysis report that outlines each failure, its underlying cause, and suggested code changes to resolve the issue. This report should serve as a guide for developers to implement necessary fixes and improve code quality."
+  agent: bug_analyzer_agent
+  output_file: bug_report.md
